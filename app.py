@@ -1,11 +1,12 @@
 from flask import Flask,render_template,request
-import joblib
+import pickel
+import pandas as pd
 import numpy as np
 
-popular_df = joblib.load(open('popular.pkl','rb'))
-pt = joblib.load(open('pt.pkl','rb'))
-books = joblib.load(open('books.pkl','rb'))
-similarity_scores = joblib.load(open('similarity_scores.pkl','rb'))
+popular_df = pickel.load(open('popular.pkl','rb'))
+pt = pickel.load(open('pt.pkl','rb'))
+books = pickel.load(open('books.pkl','rb'))
+similarity_scores = pickel.load(open('similarity_scores.pkl','rb'))
 
 app = Flask(__name__)
 
