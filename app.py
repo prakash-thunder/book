@@ -1,5 +1,5 @@
 from flask import Flask,render_template,request
-import pickel
+from pickel5 import pickle
 import pandas as pd
 import numpy as np
 
