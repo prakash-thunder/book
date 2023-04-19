@@ -2,4 +2,5 @@ gunicorn
 numpy
 pandas
 flask
-scilit-learn
+scikit-learn
+pickle
