@@ -2,10 +2,10 @@ from flask import Flask,render_template,request
 import pickle
 import numpy as np
 
-popular_df = pickle.load(open(r'C:\Users\praka\Visual Studio CODE\BOOK_RECOMMENDER_SYSTEM\model\popular.pkl','rb'))
-pt = pickle.load(open(r'C:\Users\praka\Visual Studio CODE\BOOK_RECOMMENDER_SYSTEM\model\pt.pkl','rb'))
-books = pickle.load(open(r'C:\Users\praka\Visual Studio CODE\BOOK_RECOMMENDER_SYSTEM\model\books.pkl','rb'))
-similarity_scores = pickle.load(open(r'C:\Users\praka\Visual Studio CODE\BOOK_RECOMMENDER_SYSTEM\model\similarity_scores.pkl','rb'))
+popular_df = pickle.load(open(r'C:\book\Untitled Folder\popular.pkl','rb'))
+pt = pickle.load(open(r'C:\book\Untitled Folder\pt.pkl','rb'))
+books = pickle.load(open(r'C:\book\Untitled Folder\books.pkl','rb'))
+similarity_scores = pickle.load(open(r'C:\book\Untitled Folder\similarity_scores.pkl','rb'))
 
 app = Flask(__name__)
 
@@ -16,7 +16,7 @@ def index():
                            author=list(popular_df['Book-Author'].values),
                            image=list(popular_df['Image-URL-M'].values),
                            votes=list(popular_df['num_ratings'].values),
-                           rating=list(popular_df['avg_ratings'].values)
+                           rating=list(popular_df['avg_rating'].values)
                            )
 
 @app.route('/recommend')
@@ -26,8 +26,7 @@ def recommend_ui():
 @app.route('/recommend_books',methods=['post'])
 def recommend():
     user_input = request.form.get('user_input')
-    print(user_input)
-    index = np.where(pt.index == str(user_input))[0][0]
+    index = np.where(pt.index == user_input)[0][0]
     similar_items = sorted(list(enumerate(similarity_scores[index])), key=lambda x: x[1], reverse=True)[1:5]
 
     data = []
